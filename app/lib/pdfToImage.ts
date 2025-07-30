@@ -31,10 +31,19 @@ export async function convertPdfToImage(
   try {
     const lib = await loadPdfJs();
 
+    console.log(file);
+    
+
     const arrayBuffer = await file.arrayBuffer();
+    console.log("arraybuffer: ", arrayBuffer);
     const pdf = await lib.getDocument({ data: arrayBuffer }).promise;
+
+    // console.log("pdf: ", pdf);
+    
     const page = await pdf.getPage(1);
 
+    // console.log("Page: ", page);
+    
     const viewport = page.getViewport({ scale: 4 });
     const canvas = document.createElement("canvas");
     const context = canvas.getContext("2d");
